@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function CompA(props) {
   return (
@@ -21,26 +21,52 @@ class CompC extends React.Component {
 
 const HomePage = () => {
   const [value, setValue] = useState(0);
+  const [otherValue, setOtherValue] = useState(0);
+
+  useEffect(() => {
+    console.log("Use effect called");
+  }, []);
 
   function handleIncrement() {
-    setValue((prevValue) => prevValue + 1)
+    setValue((prevValue) => prevValue + 1);
   }
 
   function handleDecrement() {
-    setValue((prevValue) => prevValue - 1)
+    setValue((prevValue) => prevValue - 1);
+  }
+
+  function handleIncrementOther() {
+    setValue((prevValue) => prevValue + 1);
+  }
+
+  function handleDecrementOther() {
+    setValue((prevValue) => prevValue - 1);
   }
 
   return (
     <>
       <h1>Current Value</h1>
-      <span style={{marginRight: '15px'}}> Current Value: {value}</span>
-      <button onClick={handleIncrement} type="button">+</button>
-      <button onClick={handleDecrement} type="button">-</button>
-      <CompA 
+      <span style={{ marginRight: "15px" }}> Current Value: {value}</span>
+      <button onClick={handleIncrement} type="button">
+        +
+      </button>
+      <button onClick={handleDecrement} type="button">
+        -
+      </button>
+
+      <h1>Other Value</h1>
+      <span style={{ marginRight: "15px" }}> Current Value: {otherValue}</span>
+      <button onClick={handleIncrementOther} type="button">
+        +
+      </button>
+      <button onClick={handleDecrementOther} type="button">
+        -
+      </button>
+      <CompA
         myProp1={value}
         myProp2="My Custom Value"
-        myProp3={true} 
-        myProp4={() => <div> My New JSX</div>} 
+        myProp3={true}
+        myProp4={() => <div> My New JSX</div>}
       />
     </>
   );
