@@ -18,6 +18,8 @@ export default function ResourceCreate() {
     alert(JSON.stringify(form));
   };
 
+  const resetForm = () => setForm(DEFAULT_FORM_DATA);
+
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
 
@@ -113,7 +115,6 @@ export default function ResourceCreate() {
                 <div className="field is-grouped">
                   <div className="control">
                     <button
-                      onChange={handleChange}
                       onClick={submitForm}
                       className="button is-link"
                       type="button"
@@ -122,7 +123,12 @@ export default function ResourceCreate() {
                     </button>
                   </div>
                   <div className="control">
-                    <button className="button is-link is-light">Cancel</button>
+                    <button
+                      onClick={resetForm}
+                      className="button is-link is-light"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </div>
               </form>
