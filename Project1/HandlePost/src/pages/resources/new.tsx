@@ -1,5 +1,7 @@
 import Layout from "@/components/Layout";
 import React, { useState } from "react";
+import axios from 'axios';
+import { useRouter } from "next/router";
 
 import styles from "./styles.module.css";
 
@@ -13,9 +15,16 @@ const DEFAULT_FORM_DATA = {
 
 export default function ResourceCreate() {
   const [form, setForm] = useState(DEFAULT_FORM_DATA);
+  const router = useRouter();
 
   const submitForm = () => {
-    alert(JSON.stringify(form));
+    /*Just one concept, when we are fetching something from the server we must utilize some server side requests, we must
+    send the absolute url, whereas on the browser, we can utilize the relative path */
+    axios.post("../api/resources", form)
+    .then((res) => {router.push('/')})
+    .catch((err) => {  
+      alert(err.response.data)
+    });
   };
 
   const resetForm = () => setForm(DEFAULT_FORM_DATA);
@@ -25,8 +34,9 @@ export default function ResourceCreate() {
 
     setForm({ ...form, [name]: value });
 
-    console.log(form);
   };
+
+  const person = undefined;
 
   return (
     <Layout>
